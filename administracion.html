@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusVote - Panel de Administración</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 font-sans min-h-screen flex flex-col">
+    <header class="bg-gradient-to-r from-blue-800 via-indigo-800 to-purple-800 text-white py-6">
+        <div class="container mx-auto px-4">
+            <h1 class="text-4xl font-extrabold text-center">NexusVote</h1>
+            <p class="text-center mt-2">Panel de Administración</p>
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 py-8">
+        <!-- Sección de Login -->
+        <div id="loginSection" class="max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl mb-8">
+            <div class="md:flex">
+                <div class="p-8 w-full">
+                    <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold mb-1">Acceso Administrador</div>
+                    <h2 class="block mt-1 text-lg leading-tight font-medium text-black">Iniciar Sesión</h2>
+                    <form id="adminLoginForm" class="mt-6">
+                        <div class="mb-4">
+                            <label for="adminUser" class="block text-gray-700 text-sm font-bold mb-2">Usuario</label>
+                            <input type="text" id="adminUser" name="adminUser" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                        </div>
+                        <div class="mb-6">
+                            <label for="adminPassword" class="block text-gray-700 text-sm font-bold mb-2">Contraseña</label>
+                            <input type="password" id="adminPassword" name="adminPassword" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" required>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <button type="submit" class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300">
+                                Iniciar Sesión
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel de Administración (inicialmente oculto) -->
+        <div id="adminPanel" class="hidden">
+            <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
+                <div class="p-8">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">Votación Actual</h2>
+                    <div id="currentVotingInfo" class="mb-6">
+                        <!-- La información de la votación actual se cargará aquí -->
+                    </div>
+                    <div id="approvedProposalMessage" class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4 hidden">
+                        <!-- El mensaje se insertará aquí dinámicamente -->
+                    </div>
+                    <button id="createNewVotingBtn" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300">
+                        Crear Nueva Votación
+                    </button>
+                    <button id="deleteVotingBtn" class="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 ml-4">
+                        Borrar Votación
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-md overflow-hidden">
+                <div class="p-8">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">Propuestas Aprobadas</h2>
+                    <button id="showApprovedProposalsBtn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300">
+                        Ver Propuestas Aprobadas
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal para crear nueva votación -->
+    <div id="createVotingModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden">
+        <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+            <h3 class="text-lg font-medium leading-6 text-gray-900 mb-4">Crear Nueva Votación</h3>
+            <form id="createVotingForm">
+                <div class="mb-4">
+                    <label for="votingTitle" class="block text-gray-700 text-sm font-bold mb-2">Título</label>
+                    <input type="text" id="votingTitle" name="votingTitle" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+                </div>
+                <div class="mb-4">
+                    <label for="votingDescription" class="block text-gray-700 text-sm font-bold mb-2">Descripción</label>
+                    <textarea id="votingDescription" name="votingDescription" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" rows="3" required></textarea>
+                </div>
+                <div class="flex items-center justify-between">
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300">
+                        Crear Votación
+                    </button>
+                    <button type="button" id="closeCreateVotingModal" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal para mostrar propuestas aprobadas -->
+    <div id="approvedProposalsModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden">
+        <div class="relative top-20 mx-auto p-5 border w-11/12 max-w-4xl shadow-lg rounded-md bg-white">
+            <h3 class="text-lg font-medium leading-6 text-gray-900 mb-4">Propuestas Aprobadas</h3>
+            <div id="approvedProposalsList" class="mt-2 max-h-96 overflow-y-auto">
+                <!-- Las propuestas aprobadas se cargarán aquí -->
+            </div>
+            <div class="mt-4">
+                <button id="closeApprovedProposalsModal" class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300">
+                    Cerrar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-gray-800 text-white py-4">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2024 NexusVote. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>

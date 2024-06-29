@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexusVote - Visualización de Resultados</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body class="bg-gradient-to-br from-indigo-100 to-purple-200 font-sans min-h-screen flex flex-col">
+    <header class="bg-gradient-to-r from-indigo-800 via-purple-800 to-pink-800 text-white py-8">
+        <div class="container mx-auto px-4">
+            <h1 class="text-5xl font-extrabold text-center tracking-tight">NexusVote</h1>
+            <p class="text-center mt-2 text-xl font-light">Visualización de Resultados</p>
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 py-12">
+        <div id="codeSection" class="max-w-lg mx-auto bg-white rounded-2xl shadow-xl overflow-hidden mb-12 transform hover:scale-105 transition duration-300">
+            <div class="p-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">Acceso a Resultados</h2>
+                <form id="codeForm" class="space-y-6">
+                    <div>
+                        <label for="accessCode" class="block text-sm font-medium text-gray-700 mb-2">Código de Acceso</label>
+                        <input type="text" id="accessCode" name="accessCode" placeholder="Ingrese el código" class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition duration-300" required>
+                    </div>
+                    <div class="flex space-x-4">
+                        <button type="submit" class="flex-1 bg-indigo-600 text-white px-6 py-3 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition duration-300">
+                            Verificar y Entrar
+                        </button>
+                        <button type="button" id="generateCode" class="flex-1 bg-green-600 text-white px-6 py-3 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 transition duration-300">
+                            Generar Código
+                        </button>
+                    </div>
+                </form>
+                <div id="generatedCodeSection" class="mt-6 hidden">
+                    <p class="text-sm font-medium text-gray-700 mb-2">Código Generado:</p>
+                    <div class="flex items-center bg-gray-100 rounded-md p-2">
+                        <span id="generatedCode" class="flex-grow font-mono text-lg"></span>
+                        <button id="copyCode" class="ml-2 text-indigo-600 hover:text-indigo-800 focus:outline-none">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="noDataSection" class="hidden max-w-lg mx-auto bg-white rounded-2xl shadow-xl overflow-hidden mb-12">
+            <div class="p-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">No hay datos disponibles</h2>
+                <p class="text-gray-600">En este momento no hay resultados para visualizar. Por favor, vuelve más tarde cuando haya una votación activa.</p>
+            </div>
+        </div>
+
+        <div id="resultsSection" class="hidden max-w-4xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
+            <div class="p-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">Resultados de la Votación</h2>
+                <div id="votingInfo" class="mb-8">
+                    <!-- La información de la votación se cargará aquí -->
+                </div>
+                <div class="mb-8">
+                    <canvas id="resultsChart" width="400" height="200"></canvas>
+                </div>
+                <div id="votingStatus" class="text-center text-xl font-semibold p-4 bg-gray-100 rounded-lg">
+                    <!-- El estado de la votación se mostrará aquí -->
+                </div>
+            </div>
+        </div>
+        <div id="noDataSection" class="hidden max-w-lg mx-auto bg-white rounded-2xl shadow-xl overflow-hidden mb-12">
+            <!-- El contenido se llenará dinámicamente -->
+        </div>
+        
+    </main>
+
+    <footer class="bg-gray-900 text-white py-6 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2024 NexusVote. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>

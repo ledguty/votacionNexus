@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.modal.active {
+    display: flex;
+}
+
+#notificationDot.active {
+    display: block;
+}
+
+/* Animaciones y efectos adicionales */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.bg-white {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+.bg-white:hover {
+    transform: translateY(-5px);
+    transition: all 0.3s ease-out;
+}
+
+/* Efecto de gradiente dinámico en el header */
+@keyframes gradientFlow {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+header {
+    background-size: 200% 200%;
+    animation: gradientFlow 15s ease infinite;
+}
+
+/* Sombra personalizada para hover */
+.hover\:shadow-3xl:hover {
+    box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.3);
+}
+
+/* Efecto de brillo en los iconos */
+@keyframes iconGlow {
+    0%, 100% {
+        filter: drop-shadow(0 0 5px rgba(59, 130, 246, 0.5));
+    }
+    50% {
+        filter: drop-shadow(0 0 20px rgba(59, 130, 246, 0.8));
+    }
+}
+
+.fas {
+    animation: iconGlow 3s infinite;
+}
