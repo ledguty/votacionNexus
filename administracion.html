@@ -44,14 +44,22 @@
 
         <!-- Panel de Administración (inicialmente oculto) -->
         <div id="adminPanel" class="hidden">
+            <div id="approvedProposalMessage" class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4 hidden">
+                <!-- El mensaje se insertará aquí dinámicamente -->
+                <button id="formalizeProposalBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
+                    Formalizar Propuesta con IA
+                </button>
+                <div id="formalProposalResult" class="mt-4 p-4 bg-gray-100 rounded hidden">
+                    <h4 class="font-bold mb-2">Propuesta Formalizada:</h4>
+                    <p id="formalProposalText"></p>
+                </div>
+            </div>
+
             <div class="bg-white rounded-xl shadow-md overflow-hidden mb-8">
                 <div class="p-8">
                     <h2 class="text-2xl font-bold text-gray-800 mb-4">Votación Actual</h2>
                     <div id="currentVotingInfo" class="mb-6">
                         <!-- La información de la votación actual se cargará aquí -->
-                    </div>
-                    <div id="approvedProposalMessage" class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4 hidden">
-                        <!-- El mensaje se insertará aquí dinámicamente -->
                     </div>
                     <button id="createNewVotingBtn" class="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300">
                         Crear Nueva Votación
@@ -111,15 +119,6 @@
                 </button>
             </div>
         </div>
-        <!-- Añade esto dentro del div con id "approvedProposalMessage" -->
-<button id="formalizeProposalBtn" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">
-    Formalizar Propuesta con IA
-</button>
-<div id="formalProposalResult" class="mt-4 p-4 bg-gray-100 rounded hidden">
-    <h4 class="font-bold mb-2">Propuesta Formalizada:</h4>
-    <p id="formalProposalText"></p>
-</div>
-
     </div>
 
     <footer class="bg-gray-800 text-white py-4">
